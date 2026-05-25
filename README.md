@@ -131,7 +131,13 @@ seen_problems.json
 ```
 
 ---
+## 🔑 Required API Token Scope
 
+The Dynatrace API token must include the following permission:
+
+```text
+Read problems (problems.read)
+```
 # ⚙️ Configuration
 
 The application requires a `config.json` file in the runtime directory.
