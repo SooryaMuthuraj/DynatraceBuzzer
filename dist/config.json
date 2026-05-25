@@ -1,0 +1,18 @@
+{
+  "dynatrace": {
+    "base_url": "https://your-tenant-id.live.dynatrace.com",
+    "api_token": "dt0c01.XXXXXX..."
+  },
+  "filters": {
+    "management_zones": [
+      "DB",
+      "DC"
+    ],
+    "text_filter": ""
+  },
+  "app_settings": {
+    "log_level": "INFO",
+    "ssl_verify": false,
+    "interval_seconds": 60
+  }
+}
