@@ -138,12 +138,19 @@ def fetch_open_problems(config):
     }
     url = f"{base_url}/api/v2/problems"
 
-    management_zones = config.get("filters", {}).get("management_zones", [])
-    problem_selector = 'status("OPEN")'
+    # --- THIS IS THE UPDATED FILTERING LOGIC ---
+    filters = config.get("filters", {})
+    management_zones = filters.get("management_zones") or filters.get("managementZones", [])
+
+    if isinstance(management_zones, str):
+        management_zones = [management_zones]
+
+    problem_selector = 'status("open")'
 
     if management_zones:
         mz_filters = ",".join([f'"{mz}"' for mz in management_zones])
         problem_selector += f',managementZones({mz_filters})'
+    # -------------------------------------------
 
     params = {
         "problemSelector": problem_selector,
@@ -162,7 +169,6 @@ def fetch_open_problems(config):
     
     resp.raise_for_status()
     return resp.json().get("problems", [])
-
 # ---------------- NOTIFICATION WORKER ----------------
 def show_notification(title, message):
     def popup():
